@@ -14,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_expanse")
-public class Expanse {
+public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -22,5 +22,5 @@ public class User {
     private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Expanse> expanses;
+    private List<Expense> expenses;
 }

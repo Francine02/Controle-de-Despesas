@@ -1,34 +1,35 @@
+```mermaid
 classDiagram
-    class Usuario {
-        - Long id
-        - String username
-        - String password
-        - String email
-        + register()
-        + login()
-    }
+  class User {
+    - Long id
+    - String username
+    - String password
+    - String email
+    + register()
+    + login()
+  }
 
-    class Despesa {
-        - Long id
-        - String description
-        - BigDecimal amount
-        - LocalDate date
-        - Categoria category
-        - Usuario user
-        + addExpense()
-        + getExpense()
-        + updateExpense()
-        + deleteExpense()
-        + getExpensesByUser()
-    }
+  class Expense {
+    - Long id
+    - String description
+    - BigDecimal amount
+    - LocalDate date
+    - Category category
+    - User user
+    + addExpense()
+    + getExpense()
+    + updateExpense()
+    + deleteExpense()
+    + getExpensesByUser()
+  }
 
-    enum Categoria {
-        Alimentacao
-        Transporte
-        Lazer
-        Saude
-        Outros
-    }
+  class Category {
+    << enumeration >>
+    + ALIMENTACAO
+    + TRANSPORTE
+    + LAZER
+    + SAUDE
+    + OUTROS
+  }
 
-    Usuario "1" --> "0..*" Despesa : owns
-    Despesa "1" --> "1" Usuario : belongs to
+  User "1" --> "0..*" Expense
