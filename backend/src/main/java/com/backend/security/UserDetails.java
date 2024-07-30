@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
 import com.backend.entities.User;
 import com.backend.repositories.UserRepository;
 
+@Component
 public class UserDetails implements UserDetailsService {//Esta classe é responsável por carregar os detalhes do usuário para autenticação
     @Autowired
     private UserRepository userRepository;
