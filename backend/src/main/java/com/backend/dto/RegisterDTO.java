@@ -1,5 +1,5 @@
 package com.backend.dto;
 
-public record RegisterDTO(String name, String email, String password) {
+public record RegisterDTO(String userName, String email, String password) {
     
 }

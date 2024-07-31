@@ -23,7 +23,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(keySecret); // Algoritmo de assinatura usando o HMAC com a chave secreta
 
             String token = JWT.create() // Cria o token JWT
-                    .withIssuer("auth") // Defini o emissor do token
+                    .withIssuer("backend") // Defini o emissor do token
                     .withSubject(user.getEmail()) // Define o assunto do token como o email
                     .withExpiresAt(this.generateExpireToken())// A data de expiração do token
                     .sign(algorithm);// Assina o token usando o algoritmo configurado
@@ -40,7 +40,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(keySecret);
             // Verifica e decodifica o token JWT.
             return JWT.require(algorithm) // Configura a verificação com o algoritmo
-                    .withIssuer("auth")//Emissor
+                    .withIssuer("backend")//Emissor
                     .build()//Constrói o verificador do token
                     .verify(token)//Verifica o token
                     .getSubject(); //Retorna o assunto(email)

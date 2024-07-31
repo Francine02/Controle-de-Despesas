@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,12 +28,12 @@ public class SecurityFilter extends OncePerRequestFilter {// Filtro que executa 
     UserRepository userRepository;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal( @NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
             throws ServletException, IOException {
-        var token = this.recoverToken(request); //Extrai do cabeçalho da requisição
-        var login = tokenService.verificationToken(token);//Verifica a validade do token usando o TokenService. Retorna o email associado ao token se for válido.
+        String token = this.recoverToken(request); //Extrai do cabeçalho da requisição
+        String login = tokenService.verificationToken(token);//Verifica a validade do token usando o TokenService. Retorna o email associado ao token se for válido.
 
-        if (login != null) {//Verifica se o token é valido
+        if (token != null) {//Verifica se o token é valido
             User user = userRepository.findByEmail(login).orElseThrow();//Busa o usuário no banco de dados pelo email recuperado no token
 
             var authorities = Collections.singletonList(new SimpleGrantedAuthority("USER"));//Define um papel para o usuário
@@ -42,12 +43,11 @@ public class SecurityFilter extends OncePerRequestFilter {// Filtro que executa 
         filterChain.doFilter(request, response);//Permite que a requisição prossiga para o próximo filtro na cadeia
     }
 
-    private String recoverToken(HttpServletRequest request) {//Extrai o token do cabeçalho da requisição
-        var auth = request.getHeader("Autorização");//Obtém o valor do cabeçalho
-
-        if (auth == null)
+    private String recoverToken(HttpServletRequest request) {
+        String auth = request.getHeader("Authorization");
+        if (auth == null || !auth.startsWith("Bearer ")) {
             return null;
-
-        return auth.replace("Bearer", "");//Remove a parte Bearer do cabeçalho, retornando apenas o token
+        }
+        return auth.replace("Bearer ", "");
     }
 }

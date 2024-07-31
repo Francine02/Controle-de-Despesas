@@ -27,7 +27,7 @@ public class AuthController {
     private final TokenService tokenService;
 
     @PostMapping("/login")//Endpoint
-    public ResponseEntity login(@RequestBody LoginDTO requestBody) {
+    public ResponseEntity<?> login(@RequestBody LoginDTO requestBody) {
         User user = this.userRepository.findByEmail(requestBody.email())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado!!")); //Busca o usuário pelo email. Se não encontrado, lança uma exceção
 
@@ -40,24 +40,22 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterDTO requestBody) {
+    public ResponseEntity<?> register(@RequestBody RegisterDTO requestBody) {
         Optional<User> user = this.userRepository.findByEmail(requestBody.email());
-        //Verifica se um usuário com o email fornecido já existe. Se não, cria um novo usuário, codifica a senha e salva o usuário no repositório
 
         if (user.isEmpty()) {
             User newUser = new User();
-
             newUser.setEmail(requestBody.email());
-            newUser.setUserName(requestBody.name());
+            newUser.setUserName(requestBody.userName());
             newUser.setPassword(passwordEncoder.encode(requestBody.password()));
 
             this.userRepository.save(newUser);
 
-            String token = this.tokenService.generateToken(newUser);//Gera um token JWT para o novo usuário e retorna uma resposta ok com um ResponseDTO
+            String token = this.tokenService.generateToken(newUser);
 
             return ResponseEntity.ok(new ResponseDTO(newUser.getUserName(), token));
-
         }
         return ResponseEntity.badRequest().build();
     }
+
 }
