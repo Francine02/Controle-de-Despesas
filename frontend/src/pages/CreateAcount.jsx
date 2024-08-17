@@ -1,8 +1,11 @@
 import { BeginImg } from "../components/BeginImg";
 import { ButtonForm } from "../components/ButtonForm";
 import { Form } from "../components/Form";
+import { useNavigate } from 'react-router-dom';
 
 export function CreateAcount() {
+    const navigate = useNavigate();
+
     return (
         <div>
             <div className="grid grid-cols-1 lg:grid-cols-2 my-10 mx-10 sm:mx-36 sm:my-24 lg:my-0 lg:mx-0">
@@ -16,7 +19,7 @@ export function CreateAcount() {
 
                         <Form img="https://img.icons8.com/?size=100&id=15454&format=png&color=000000" type="password" placeholder="Senha" />
                         <ButtonForm color="bg-[#4c0192]" text="Criar" />
-                        <p className="text-sm sm:text-base font-bold">Já possui uma conta? <a href="" className="text-[#1ecebc] font-black hover:opacity-70">Entrar</a></p>
+                        <p className="text-sm sm:text-base font-bold">Já possui uma conta? <a onClick={() => navigate('/auth/login')} className="text-[#1ecebc] font-black hover:opacity-70 cursor-pointer">Entrar</a></p>
                     </form>
                 </div>
             </div>
