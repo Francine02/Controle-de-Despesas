@@ -1,3 +1,4 @@
+import { MenuBottom } from "../components/MenuBottom";
 import { UserMenu } from "../components/UserMenu";
 
 export function Home () {
@@ -5,6 +6,7 @@ export function Home () {
         <div className="h-screen py-7 px-6 sm:px-8 lg:px-12 lg:py-5">
             <UserMenu/>
 
+            <MenuBottom/>
         </div>
     )
 }

@@ -15,12 +15,12 @@ export function UserMenu() {
     }
 
     return (
-        <div className={` ${openBar ? 'shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-24 h-32 rounded-xl overflow-hidden' : 'bg-white'} fixed`}>
+        <div className={` ${openBar ? 'shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-24 h-32 rounded-xl overflow-hidden bg-white' : 'bg-white'} fixed`}>
             <img
                 onClick={handleOpenMenu}
                 src="https://img.icons8.com/?size=100&id=7819&format=png&color=000000"
                 alt="Usuário menu"
-                className="w-12 opacity-70 cursor-pointer" />
+                className="w-12 cursor-pointer" />
 
             <div className={`pt-8 ${openBar ? 'block' : 'hidden'} p-2`}>
                 <button onClick={logout} className="inline-flex items-center">
