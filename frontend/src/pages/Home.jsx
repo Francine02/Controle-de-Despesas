@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Expenses } from "../components/Expenses";
-import { MenuBottom } from "../components/MenuBottom";
-import { UserMenu } from "../components/UserMenu";
-import { ExpenseForm } from '../components/ExpenseForm';
+import { Expenses } from "../components/home/Expenses";
+import { MenuBottom } from "../components/home/MenuBottom";
+import { UserMenu } from "../components/home/UserMenu";
+import { ExpenseForm } from '../components/home/ExpenseForm';
 
 export function Home() {
     const [expenses, setExpenses] = useState([]) // Para armazenar a lista de despesas
