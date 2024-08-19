@@ -6,6 +6,8 @@ import { ExpenseForm } from '../components/home/ExpenseForm';
 
 export function Home() {
     const [expenses, setExpenses] = useState([]) // Para armazenar a lista de despesas
+    const [crud, setCrud] = useState(null)
+    const [idExpense, setIdExpense] = useState(null)
 
     const token = localStorage.getItem('token') // Pegando o token do localStorage
 
@@ -38,14 +40,17 @@ export function Home() {
             <UserMenu />
 
             <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-                <ExpenseForm/>
+                <ExpenseForm idExpense={idExpense} expenses={expenses} crud={crud}/>
             </div>
 
-            <MenuBottom />
+            <MenuBottom setCrud={setCrud}/>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 pt-16 gap-5">
                 {expenses.map((expense) => (//Percorre as despesas
                     <Expenses
+                        setIdExpense={setIdExpense}
+                        crud={crud}
+                        id={expense.id}
                         key={expense.id}
                         titulo={expense.name}
                         description={expense.description}

@@ -1,10 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createExpense, updateExpense } from '../../api/api';
 
-export function ExpenseForm() {
-    const [isOpen, setIsOpen] = useState(true)
-    const [category, setCategory] = useState('')
+export function ExpenseForm({ crud, expense, idExpense }) {
+    const [isOpen, setIsOpen] = useState(false)
+    const [category, setCategory] = useState(idExpense?.category || '')
+    const [name, setName] = useState(idExpense?.name || '')
+    const [amount, setAmount] = useState(idExpense?.amount || '')
+    const [description, setDescription] = useState(idExpense?.description || '')
+    const [date, setDate] = useState(idExpense?.date ? expense.date.slice(0, 10) : '')
+
+    useEffect(() => {
+        if (crud === 'create' || crud === 'edit') {
+            setIsOpen(true)
+        }
+    }, [crud])
 
     if (!isOpen) return null
+
+    const handleSubmit = async () => {
+
+        const data = {
+            name,
+            description,
+            amount: parseFloat(amount), // Converte o valor para número
+            date, // Data já no formato YYYY-MM-DD
+            category
+        }
+
+        try {
+            if (crud === 'edit') {
+                await updateExpense(idExpense, data)
+                console.log('Despesa atualizada com sucesso')
+            } else {
+                await createExpense(data)
+                console.log('Despesa criada com sucesso')
+            }
+            setIsOpen(false)
+        } catch (error) {
+            console.error('Erro ao salvar despesa:', error)
+        }
+    }
 
     return (
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto border border-gray-300 relative">
@@ -12,25 +47,35 @@ export function ExpenseForm() {
                 className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
                 onClick={() => setIsOpen(false)}>&times;
             </button>
-            <h2 className="text-black text-lg font-semibold mb-4"></h2>
-            <div className="flex flex-col space-y-4">
+            <h2 className="text-black text-lg font-semibold mb-4">
+                {crud === 'edit' ? 'Editar Despesa' : 'Criar Despesa'}
+            </h2>
+            <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                 <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
                     <input
                         type="text"
-                        placeholder="Título"
-                        className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#4c0192]"/>
+                        placeholder="Nome"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#4c0192]" />
                     <input
                         type="number"
                         placeholder="Valor"
-                        className="w-full sm:w-32 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#4c0192]"/>
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        className="w-full sm:w-32 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#4c0192]" />
                 </div>
 
                 <textarea
                     placeholder="Descrição"
-                    className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#4c0192] max-h-28 resize-none"/>
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#4c0192] max-h-28 resize-none" />
                 <input
                     type="date"
-                    className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#4c0192] w-full"/>
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#4c0192] w-full" />
 
                 <div className="flex flex-col space-y-2">
                     <label className="text-black font-semibold">Categorias</label>
@@ -47,8 +92,10 @@ export function ExpenseForm() {
                     </select>
                 </div>
 
-                <button className="bg-[#4c0192] text-white p-2 rounded-lg hover:bg-[#1ecebc] transition-all"></button>
-            </div>
+                <button type="submit" className="bg-[#4c0192] text-white p-2 rounded-lg hover:bg-[#1ecebc] transition-all">
+                    {crud === 'edit' ? 'Salvar Alterações' : 'Criar Despesa'}
+                </button>
+            </form>
         </div>
     )
 }

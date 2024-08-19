@@ -1,17 +1,17 @@
 import { useState } from "react"
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 export function UserMenu() {
     const [openBar, setOpenBar] = useState(false)
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const handleOpenMenu = () => {
         setOpenBar(!openBar)
     }
 
     const logout = () => {
-        localStorage.removeItem('token');
-        navigate('/auth/login');
+        // localStorage.removeItem('token');
+        // navigate('/auth/login');
     }
 
     return (
