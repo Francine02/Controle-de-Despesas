@@ -8,20 +8,17 @@ function App() {
   const isAuthenticated = !!localStorage.getItem('token');
 
   return (
-    // <Router>
-    //   <Routes>
-    //     <Route path="/auth/login" element={<Login />} />
-    //     <Route path="/auth/register" element={<CreateAcount />} />
-    //     <Route
-    //       path="/expense/all"
-    //       element={isAuthenticated ? <Home /> : <Navigate to="/auth/login" />} //Rota protegida. Verifica se existe um token no localStorage para assim liberar o home ou mandar de volta para o login
-    //     />
-    //     <Route path="*" element={<Navigate to="/auth/login" />} />
-    //   </Routes>
-    // </Router>
-    <div>
-      <Home/>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/register" element={<CreateAcount />} />
+        <Route
+          path="/expense/all"
+          element={isAuthenticated ? <Home /> : <Navigate to="/auth/login" />} //Rota protegida. Verifica se existe um token no localStorage para assim liberar o home ou mandar de volta para o login
+        />
+        <Route path="*" element={<Navigate to="/auth/login" />} />
+      </Routes>
+    </Router>
   )
 }
 

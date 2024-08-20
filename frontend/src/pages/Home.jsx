@@ -3,6 +3,7 @@ import { Expenses } from "../components/home/Expenses";
 import { MenuBottom } from "../components/home/MenuBottom";
 import { UserMenu } from "../components/home/UserMenu";
 import { ExpenseForm } from '../components/home/ExpenseForm';
+import { Info } from '../components/home/Info';
 
 export function Home() {
     const [expenses, setExpenses] = useState([]) // Para armazenar a lista de despesas
@@ -42,6 +43,7 @@ export function Home() {
     return (
         <div className="h-screen py-7 px-6 sm:px-8 lg:px-12 lg:py-5">
             <UserMenu />
+            <Info expenses={expenses}/>
 
             <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                 <ExpenseForm

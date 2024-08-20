@@ -21,10 +21,10 @@ export function Expenses({ titulo, description, amount, date, category, setIdExp
             <div className="flex justify-between">
                 <h1 className="text-xl lg:text-2xl font-semibold border-b-4 border-[#4c0192]">{titulo}</h1>
                 <div className="space-x-5">
-                    <button onClick={handleEdit} className="text-blue-500 hover:text-blue-700">
+                    <button onClick={handleEdit}>
                         <img src="https://img.icons8.com/?size=100&id=11762&format=png&color=000000" alt="editar" className="w-5 hover:border-b-4 hover:border-[#4c0192]"/>
                     </button>
-                    <button onClick={handleDeleteClick} className="text-red-500 hover:text-red-700">
+                    <button onClick={handleDeleteClick}>
                         <img src="https://img.icons8.com/?size=100&id=99961&format=png&color=000000" alt="editar" className="w-5 hover:border-b-4 hover:border-[#4c0192]"/>
                     </button>
                 </div>
