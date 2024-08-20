@@ -1,23 +1,36 @@
 import { useState, useEffect } from 'react';
 import { createExpense, updateExpense } from '../../api/api';
 
-export function ExpenseForm({ crud, expense, idExpense }) {
+export function ExpenseForm({ crud, idExpense, getExpenses }) {
     const [isOpen, setIsOpen] = useState(false)
-    const [category, setCategory] = useState(idExpense?.category || '')
-    const [name, setName] = useState(idExpense?.name || '')
-    const [amount, setAmount] = useState(idExpense?.amount || '')
-    const [description, setDescription] = useState(idExpense?.description || '')
-    const [date, setDate] = useState(idExpense?.date ? expense.date.slice(0, 10) : '')
+    const [category, setCategory] = useState('') // Armazena os dados da despesa
+    const [name, setName] = useState('')
+    const [amount, setAmount] = useState('')
+    const [description, setDescription] = useState('')
+    const [date, setDate] = useState('')
 
-    useEffect(() => {
-        if (crud === 'create' || crud === 'edit') {
+    useEffect(() => { //Quando o crud for 'edit', o formulário é preenchido com os dados da despesa selecionada
+        if (crud === 'edit') {
             setIsOpen(true)
+            setCategory(idExpense?.category || '')
+            setName(idExpense?.name || '')
+            setAmount(idExpense?.amount || '')
+            setDescription(idExpense?.description || '')
+            setDate(idExpense?.date ? idExpense.date.slice(0, 10) : '')
+        } else if (crud === 'create') {// Limpa os campos para criar uma nova despesa
+            setIsOpen(true)
+            setCategory('')
+            setName('')
+            setAmount('')
+            setDescription('')
+            setDate('')
         }
-    }, [crud])
+    }, [crud, idExpense])
 
     if (!isOpen) return null
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
 
         const data = {
             name,
@@ -29,12 +42,13 @@ export function ExpenseForm({ crud, expense, idExpense }) {
 
         try {
             if (crud === 'edit') {
-                await updateExpense(idExpense, data)
+                await updateExpense(idExpense.id, data)
                 console.log('Despesa atualizada com sucesso')
             } else {
                 await createExpense(data)
                 console.log('Despesa criada com sucesso')
             }
+            getExpenses()
             setIsOpen(false)
         } catch (error) {
             console.error('Erro ao salvar despesa:', error)

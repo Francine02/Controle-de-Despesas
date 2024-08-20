@@ -33,3 +33,18 @@ export const updateExpense = async (id, data) => {
 
     return await response.json()
 }
+
+export const deleteExpense = async (id) => {
+    const token = localStorage.getItem('token')
+    const response = await fetch(`https://controle-de-despesas-production.up.railway.app/expense/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        }
+    })
+
+    if (!response.ok) {
+        throw new Error('Erro ao excluir despesa')
+    }
+}

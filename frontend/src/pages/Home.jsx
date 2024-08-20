@@ -6,8 +6,8 @@ import { ExpenseForm } from '../components/home/ExpenseForm';
 
 export function Home() {
     const [expenses, setExpenses] = useState([]) // Para armazenar a lista de despesas
-    const [crud, setCrud] = useState(null)
-    const [idExpense, setIdExpense] = useState(null)
+    const [crud, setCrud] = useState(null) // Define o estado de operação: 'create', 'edit' ou null
+    const [idExpense, setIdExpense] = useState(null) // Armazena a despesa selecionada para edição
 
     const token = localStorage.getItem('token') // Pegando o token do localStorage
 
@@ -22,7 +22,7 @@ export function Home() {
             });
 
             const jsonData = await response.json() //Transformando a resposta para json
-
+            
             setExpenses(jsonData)//Colocando o json no useState
 
         } catch (error) {
@@ -35,21 +35,29 @@ export function Home() {
         getExpenses()
     }, [])
 
+    const handleDelete = (id) => {// Função para remover uma despesa da lista
+        setExpenses(expenses.filter(expense => expense.id !== id))
+    }
+
     return (
         <div className="h-screen py-7 px-6 sm:px-8 lg:px-12 lg:py-5">
             <UserMenu />
 
             <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-                <ExpenseForm idExpense={idExpense} expenses={expenses} crud={crud}/>
+                <ExpenseForm
+                    idExpense={idExpense}
+                    expenses={expenses}
+                    crud={crud}
+                    getExpenses={getExpenses}
+                />
             </div>
 
-            <MenuBottom setCrud={setCrud}/>
+            <MenuBottom setCrud={setCrud} />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 pt-16 gap-5">
-                {expenses.map((expense) => (//Percorre as despesas
+                {expenses.map((expense) => (
                     <Expenses
                         setIdExpense={setIdExpense}
-                        crud={crud}
                         id={expense.id}
                         key={expense.id}
                         titulo={expense.name}
@@ -57,6 +65,8 @@ export function Home() {
                         amount={expense.amount}
                         date={expense.date}
                         category={expense.category}
+                        setCrud={setCrud}
+                        handleDelete={handleDelete}
                     />
                 ))}
             </div>
