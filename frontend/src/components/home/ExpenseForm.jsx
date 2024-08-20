@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createExpense, updateExpense } from '../../api/api';
 
-export function ExpenseForm({ crud, idExpense, getExpenses }) {
+export function ExpenseForm({ crud, idExpense, getExpenses, setCrud }) {
     const [isOpen, setIsOpen] = useState(false)
     const [category, setCategory] = useState('') // Armazena os dados da despesa
     const [name, setName] = useState('')
@@ -44,9 +44,11 @@ export function ExpenseForm({ crud, idExpense, getExpenses }) {
             if (crud === 'edit') {
                 await updateExpense(idExpense.id, data)
                 console.log('Despesa atualizada com sucesso')
+                setCrud(null)
             } else {
                 await createExpense(data)
                 console.log('Despesa criada com sucesso')
+                setCrud(null)
             }
             getExpenses()
             setIsOpen(false)
@@ -112,4 +114,4 @@ export function ExpenseForm({ crud, idExpense, getExpenses }) {
             </form>
         </div>
     )
-}
+} 

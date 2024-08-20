@@ -49,6 +49,7 @@ export function Home() {
                 <ExpenseForm
                     idExpense={idExpense}
                     expenses={expenses}
+                    setCrud={setCrud}
                     crud={crud}
                     getExpenses={getExpenses}
                 />
