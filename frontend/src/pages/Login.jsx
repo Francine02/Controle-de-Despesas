@@ -12,7 +12,7 @@ export function Login() {
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch('https://controle-de-despesas-production.up.railway.app/auth/login', {
+            const response = await fetch('https://controle-de-despesas-h7z5.onrender.com/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }) //Envia no body os valores dos inputs

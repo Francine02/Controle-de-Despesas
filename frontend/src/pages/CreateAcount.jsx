@@ -13,7 +13,7 @@ export function CreateAcount() {
     const handleRegister = async (e) => {
         e.preventDefault()
         try{
-            const response = await fetch('https://controle-de-despesas-production.up.railway.app/auth/register', {
+            const response = await fetch('https://controle-de-despesas-h7z5.onrender.com/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({userName: newName, email: newEmail, password: newPassword})
