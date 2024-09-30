@@ -11,4 +11,4 @@ COPY ./target/ControledeDespesas.jar /app/ControledeDespesas.jar
 EXPOSE 8080
 
 # Comando para executar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/ControledeDespesas.jar"]
