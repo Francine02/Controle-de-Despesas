@@ -1,6 +1,10 @@
 # Controle de Despesas
 Este projeto é uma aplicação para controle de despesas. A aplicação permite criar, editar, visualizar e excluir despesas, além de fornecer informações sobre o total de despesas, despesas do mês atual e a categoria mais usada.
 
+<img src="./prints/desktop.png" width="400" /><img src="./prints/desktop%20(3).png" width="400" /><img src="./prints/desktop%20(5).png" width="400" /><img src="./prints/desktop%20(6).png" width="400" />
+
+<img src="./prints/mobile.png" width="200" /><img src="./prints/mobile%20(4).png" width="200" /><img src="./prints/mobile%20(3).png" width="200" /><img src="./prints/mobile%20(2).png" width="200" />
+
 ## Tecnologias
 
 - **Frontend**: React, React Hooks:`useState` e `useEfect` , Tailwind CSS, JavaScript
