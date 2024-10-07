@@ -14,7 +14,7 @@ export function Home() {
 
     const getExpenses = async () => {
         try {
-            const response = await fetch('https://controle-de-despesas-h7z5.onrender.com/expense/all', {
+            const response = await fetch('https://controle-de-despesas-ptt3.onrender.com/expense/all', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,

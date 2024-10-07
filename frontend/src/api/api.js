@@ -1,6 +1,6 @@
 export const createExpense = async (data) => {
     const token = localStorage.getItem('token');
-    const response = await fetch('https://controle-de-despesas-h7z5.onrender.com/expense/add', {
+    const response = await fetch('https://controle-de-despesas-ptt3.onrender.com/expense/add', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -18,7 +18,7 @@ export const createExpense = async (data) => {
 
 export const updateExpense = async (id, data) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`https://controle-de-despesas-h7z5.onrender.com/expense/${id}`, {
+    const response = await fetch(`https://controle-de-despesas-ptt3.onrender.com/expense/${id}`, {
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -36,7 +36,7 @@ export const updateExpense = async (id, data) => {
 
 export const deleteExpense = async (id) => {
     const token = localStorage.getItem('token')
-    const response = await fetch(`https://controle-de-despesas-h7z5.onrender.com/expense/${id}`, {
+    const response = await fetch(`https://controle-de-despesas-ptt3.onrender.com/expense/${id}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`,
