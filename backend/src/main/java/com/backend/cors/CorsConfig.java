@@ -10,7 +10,7 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry corsRegistry) {
         corsRegistry.addMapping("/**")
                 .allowedOrigins(
-                        "https://controle-de-despesas-h7z5.onrender.com",
+                        "https://controle-de-despesas-ptt3.onrender.com",
                         "http://localhost:5173",
                         "https://controle-de-despesas-umber.vercel.app")
                 .allowedMethods("GET", "POST", "DELETE", "PUT");
