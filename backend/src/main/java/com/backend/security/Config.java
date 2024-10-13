@@ -29,6 +29,7 @@ public class Config {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()//Permite acesso sem autenticação para o endpoint de login
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()//Permite acesso sem autenticação para o endpoint de registro
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .anyRequest().authenticated())//Exige autenticação para todas as outras solicitações
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

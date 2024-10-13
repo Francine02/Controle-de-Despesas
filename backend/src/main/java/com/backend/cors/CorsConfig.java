@@ -13,6 +13,6 @@ public class CorsConfig implements WebMvcConfigurer {
                         "https://controle-de-despesas-ptt3.onrender.com",
                         "http://localhost:5173",
                         "https://controle-de-despesas-umber.vercel.app")
-                .allowedMethods("GET", "POST", "DELETE", "PUT");
+                .allowedMethods("GET", "POST", "DELETE", "PUT", "OPTIONS");
     }
 }
