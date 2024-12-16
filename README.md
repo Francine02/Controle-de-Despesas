@@ -13,8 +13,8 @@ Este projeto é uma aplicação para controle de despesas. A aplicação permite
 
 ### Versão Desktop
 <div align="center">
-  <img src="./prints/desktop.png" width="500" /><img src="./prints/desktop%20(3).png" width="500" />
-  <img src="./prints/desktop%20(5).png" width="500" /><img src="./prints/desktop%20(6).png" width="500" />
+  <img src="./prints/desktop.png" width="400" /><img src="./prints/desktop%20(3).png" width="400" />
+  <img src="./prints/desktop%20(5).png" width="400" /><img src="./prints/desktop%20(6).png" width="400" />
 </div>
 
 ### Versão Mobile
